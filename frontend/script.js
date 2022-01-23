@@ -3,11 +3,14 @@ let filled = false;
 let initialURL = 'http://localhost:5000';
 
 let paragraphs = 5;
-let paraLength = "medium";
+let paraLength = "short";
 let capitalization = "aa";
-let style = { selected: true, selection: "italics" };
+let style = { 
+    selected: false, 
+    selections: [ "italics", "bold" ] 
+};
 let initialText = '';
-const paraLengths = { short: 40, medium: 60, long: 100 }
+const paraLengths = { short: 50, medium: 100, long: 200 }
 
 function autocomplete(inp) {
     var currentFocus;
@@ -84,17 +87,41 @@ function autocomplete(inp) {
     });
 }
 
+const addStyling = (paramString) => {
+    if (style.selected) {
+        let randomBool = Math.floor(Math.random() * 2)
+        if (randomBool === 1) {
+            if (style.selections.length > 1) {
+                let anotherRandomBool = Math.floor(Math.random() * 2)
+                if (anotherRandomBool == 1) {
+                    paramString = '<i>' + paramString + '</i>'
+                } else if (anotherRandomBool == 0) {
+                    paramString = '<strong>' + paramString + '</strong>'
+                }
+            } else {
+                if (style.selections[0] === "italics") {
+                    paramString = '<i>' + paramString + '</i>'
+                } else if (style.selections[0] === "bold") {
+                    paramString = '<strong>' + paramString + '</strong>'
+                }
+            }
+        }
+    }
+    return paramString
+}
+
+const isLetter = (str) => {
+    if (str.length !== 0 && str.match(/[a-z]/i)) {
+        return true 
+    }  else { 
+        return false 
+    }
+}   
+
 const formatText = () => {
     initialText = document.getElementById('lyrics-text').innerText
     let localInitialText = initialText
     let htmlToAppend = ''
-    const isLetter = (str) => {
-        if (str.length !== 0 && str.match(/[a-z]/i)) {
-            return true 
-        }  else { 
-            return false 
-        }
-    }      
     const paraWordLimit = paraLengths[paraLength];
     const paraLimit = paragraphs;
     let currentIndex = 0;
@@ -114,21 +141,20 @@ const formatText = () => {
                 const isLetterBool = isLetter(charToCheck)
                 console.log(isLetterBool);
                 if (isLetterBool) {
-                    para += wordArray[j] + '.<br><br>'
+                    para += addStyling(wordArray[j]) + '.'
                 } else {
                     wordArray[j] = wordArray[j].slice(0, -1)
                     console.log(wordArray[j]);
-                    para += wordArray[j] + '.<br><br>'
+                    para += addStyling(wordArray[j]) + '.'
                 }
             } else if (j == currentIndex) {
                 wordArray[j] = wordArray[j].slice(0, 1).toUpperCase() + wordArray[j].slice(1)
-                para += wordArray[j] + ' '
+                para += addStyling(wordArray[j]) + ' '
             } else {
-                para += wordArray[j] + ' '
+                para += addStyling(wordArray[j]) + ' '
             }
             currentIndex++
         }
-        console.log(para);
         if (capitalization == "Aa") { 
             para = para.toLowerCase()
             let repara = ''
@@ -142,16 +168,11 @@ const formatText = () => {
             para = repara
         } else if (capitalization == "aa") { para = para.toLowerCase() }
         else if (capitalization == "AA") { para = para.toUpperCase() }
+        para = '<p>' + para + '</p>'
+        console.log(para);
         htmlToAppend += para
     }
     console.log(htmlToAppend);
-    if (style.selected) {
-        if (style.selection === "italics") {
-            htmlToAppend = '<i>' + htmlToAppend + '</i>'
-        } else if (style.selection === "bold") {
-            htmlToAppend = '<strong>' + htmlToAppend + '</strong>'
-        }
-    }
     document.getElementById('lyrics-text').innerHTML = htmlToAppend
 }
 
@@ -182,5 +203,19 @@ window.onload = () => {
         } else {
             alert('Please pick a suggestion');
         }
+    })
+    document.getElementById('copy').addEventListener('click', () => {
+        let copyText = ''
+        if (style.selected) {
+            copyText = document.getElementById('lyrics-text').innerHTML
+        } else {
+            copyText = document.getElementById('lyrics-text').innerText
+        }
+        let copy = document.createElement('textarea');
+        copy.value = copyText;
+        document.body.appendChild(copy);
+        copy.select();
+        document.execCommand("copy");
+        document.body.removeChild(copy);
     })
 }
