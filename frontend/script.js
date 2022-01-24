@@ -37,6 +37,9 @@ function autocomplete(inp) {
                     b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                     b.addEventListener("click", function(e) {
                         inp.value = this.getElementsByTagName("input")[0].value;
+                        document.getElementById('input-wrapper').innerHTML += `<div class="tag">${inp.value}<i class="fa fa-times" aria-hidden="true" style="margin-left: 5px;" id="cross-icon"></i></div>`
+                        document.getElementsByTagName("input")[0].style.display = 'none'
+                        document.getElementsByTagName("input")[0].value = inp.value 
                         suggestionFilled = inp.value;
                         closeAllLists();
                     });
@@ -128,13 +131,17 @@ const formatText = () => {
     for(let i = 0; i < paraLimit; i++) {
         console.log(currentIndex);
         let para = ''
-        let wordArray = localInitialText.split(' ')
-        if (currentIndex + paraWordLimit > wordArray.length) {
-            console.log("first");
-            currentIndex = 0;
-        }
+        let wordArray = localInitialText.split(' ');
+        console.log(wordArray.length);
         let limit = currentIndex + paraWordLimit
         for(let j = currentIndex; j < limit; j++) {
+            if (limit > wordArray.length) {
+                limit = wordArray.length
+            }
+            if ((wordArray.length - j) == 1) {
+                console.log("hello");
+                currentIndex = 0;
+            }
             if (j == limit - 1) {
                 const charToCheck = wordArray[j][wordArray[j].length - 1]
                 console.log(charToCheck);
@@ -186,7 +193,7 @@ window.onload = () => {
             filled = false;
         }
         if (filled) {
-            fetch(initialURL + '/search?query=' + document.getElementById('myInput').value.trim())
+            fetch(initialURL + '/generate?query=' + document.getElementById('myInput').value.trim())
             .then(async (response) => {
                 const resp = await response.json()
                 console.log(resp);
@@ -217,5 +224,13 @@ window.onload = () => {
         copy.select();
         document.execCommand("copy");
         document.body.removeChild(copy);
+    })
+    window.addEventListener('click', (e) => {
+        if (e.target.id === "cross-icon") {
+            document.getElementById('myInput').style.display = 'block'
+            document.getElementById('myInput').value = ''
+            document.getElementsByClassName('tag')[0].remove()
+            autocomplete(document.getElementById("myInput"));
+        }
     })
 }

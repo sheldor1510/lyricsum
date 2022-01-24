@@ -11,16 +11,38 @@ body {
     display: inline-block;
 }
 
+.input-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    background-color: #f1f1f1;
+}
+
+.tag {
+    margin-right: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    font-size: 16px;
+}
+
 input {
     border: 1px solid transparent;
-    background-color: #f1f1f1;
+    background-color: transparent;
     padding: 10px;
     font-size: 16px;
 }
 
+input:focus {
+    outline: none;
+}
+
 input[type=text] {
-    background-color: #f1f1f1;
-    width: 100%;
+    background-color: transparent;
+    width: 70%;
 }
 
 input[type=submit] {

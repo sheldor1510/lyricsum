@@ -29,7 +29,7 @@ const cleanLyrics = (lyrics) => {
     return filteredLyrics
 }
 
-router.get('/search', (req, res) => {
+router.get('/generate', (req, res) => {
     const searchTerm = req.query.query
     const url = `https://api.genius.com/search?q=${searchTerm}`
     const headers = {
