@@ -92,20 +92,20 @@ function autocomplete(inp) {
 
 const addStyling = (paramString) => {
     if (style.selected) {
-        let randomBool = Math.floor(Math.random() * 2)
+        let randomBool = Math.floor(Math.random() * 3)
         if (randomBool === 1) {
             if (style.selections.length > 1) {
                 let anotherRandomBool = Math.floor(Math.random() * 2)
                 if (anotherRandomBool == 1) {
                     paramString = '<i>' + paramString + '</i>'
                 } else if (anotherRandomBool == 0) {
-                    paramString = '<strong>' + paramString + '</strong>'
+                    paramString = '<b>' + paramString + '</b>'
                 }
             } else {
                 if (style.selections[0] === "italics") {
                     paramString = '<i>' + paramString + '</i>'
                 } else if (style.selections[0] === "bold") {
-                    paramString = '<strong>' + paramString + '</strong>'
+                    paramString = '<b>' + paramString + '</b>'
                 }
             }
         }
@@ -135,32 +135,33 @@ const formatText = () => {
         console.log(wordArray.length);
         let limit = currentIndex + paraWordLimit
         for(let j = currentIndex; j < limit; j++) {
-            if (limit > wordArray.length) {
-                limit = wordArray.length
-            }
             if ((wordArray.length - j) == 1) {
                 console.log("hello");
+                limit = paraWordLimit - para.split(" ").length
                 currentIndex = 0;
-            }
-            if (j == limit - 1) {
-                const charToCheck = wordArray[j][wordArray[j].length - 1]
-                console.log(charToCheck);
-                const isLetterBool = isLetter(charToCheck)
-                console.log(isLetterBool);
-                if (isLetterBool) {
-                    para += addStyling(wordArray[j]) + '.'
-                } else {
-                    wordArray[j] = wordArray[j].slice(0, -1)
-                    console.log(wordArray[j]);
-                    para += addStyling(wordArray[j]) + '.'
-                }
-            } else if (j == currentIndex) {
-                wordArray[j] = wordArray[j].slice(0, 1).toUpperCase() + wordArray[j].slice(1)
-                para += addStyling(wordArray[j]) + ' '
+                j = 0;
+                console.log(j);
             } else {
-                para += addStyling(wordArray[j]) + ' '
+                if (j == limit - 1) {
+                    const charToCheck = wordArray[j][wordArray[j].length - 1]
+                    console.log(charToCheck);
+                    const isLetterBool = isLetter(charToCheck)
+                    console.log(isLetterBool);
+                    if (isLetterBool) {
+                        para += addStyling(wordArray[j]) + '.'
+                    } else {
+                        wordArray[j] = wordArray[j].slice(0, -1)
+                        console.log(wordArray[j]);
+                        para += addStyling(wordArray[j]) + '.'
+                    }
+                } else if (j == currentIndex) {
+                    wordArray[j] = wordArray[j].slice(0, 1).toUpperCase() + wordArray[j].slice(1)
+                    para += addStyling(wordArray[j]) + ' '
+                } else {
+                    para += addStyling(wordArray[j]) + ' '
+                }
+                currentIndex++
             }
-            currentIndex++
         }
         if (capitalization == "Aa") { 
             para = para.toLowerCase()
