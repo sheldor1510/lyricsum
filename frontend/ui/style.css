@@ -187,12 +187,20 @@ input[type="radio"] {
     vertical-align: sub;
 }
 
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+
 input[type="checkbox"] {
     accent-color: mediumslateblue;
     height: 1.3vw;
     width: 1.5vw;
     margin-right: 0.3vw;
     vertical-align: sub;
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
 }
 
 label {
@@ -256,4 +264,80 @@ label {
     font-size: 1.1vw;
     margin-top: 1.6vw;
     width: 99%;
+    position: relative;
+    z-index: 1;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.tag {
+    margin-left: 1.5vw;
+    background: #918EFF;
+    border-radius: 4px;
+    /* transform: matrix(1, 0, 0, -1, 0, 0); */
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2vw;
+    width: fit-content;
+    height: 2.2vw;
+    padding-left: 1vw;
+    padding-top: 0.7vw;
+    margin-top: 0.7vw;
+}
+
+.tag img {
+    height: 1.2vw;
+    margin-top: 0.2vw;
+}
+
+.tag img:hover {
+    cursor: pointer;
+}
+
+input[type=submit] {
+    background-color: DodgerBlue;
+    color: #fff;
+    cursor: pointer;
+}
+
+.autocomplete-items {
+    border-bottom: none;
+    border-top: none;
+    position: relative;
+    z-index: 99;
+    top: 2vw;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+}
+
+.autocomplete-items div {
+    font-size: 1.2vw;
+    padding: 1.2vw;
+    cursor: pointer;
+    color: #000000;
+    background: #FFFFFF;
+    width: 38vw;
+}
+
+.autocomplete-items div:hover {
+    color: #918EFF;
+}
+
+.autocomplete-active {
+    color: #918EFF !important;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: initial;
 }

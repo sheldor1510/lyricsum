@@ -4,16 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script>
-           window.onload = () => {
-                var slider = document.getElementById("range");
-                var output = document.getElementsByClassName('para-count')[0];
-                output.innerHTML = slider.value;
-                slider.oninput = function() {
-                    output.innerHTML = this.value;
-                }
-           }
-        </script>
+        <script src="script.js"></script>
     </head>     
     <body>
         <main>
@@ -34,7 +25,7 @@
                         <div class="format">
                             <div class="heading">
                                 <p>Paragraphs</p>
-                                <div class="para-count">
+                                <div class="para-count" id="para-count">
                                     4
                                 </div>
                             </div>
@@ -57,9 +48,9 @@
                                 <p>Capitalization</p>
                             </div>
                             <div class="choices" style="width: 110%; margin-left: -0.3vw">
-                                <input type="radio" name="capitalization" value="medium" /><label>Aa</label>
-                                <input type="radio" name="capitalization" value="short" /><label>AA</label>
-                                <input type="radio" name="capitalization" value="long" /><label>aa</label>
+                                <input type="radio" name="capitalization" value="Aa" /><label>Aa</label>
+                                <input type="radio" name="capitalization" value="AA" /><label>AA</label>
+                                <input type="radio" name="capitalization" value="aa" /><label>aa</label>
                             </div>
                         </div>
                         <div class="format">
@@ -67,9 +58,9 @@
                                 <p>HTML Options</p>
                             </div>
                             <div class="choices" style="width: 110%; margin-left: -0.3vw">
-                                <input type="checkbox" name="para-length" value="medium" /><label>&lt;p&gt;</label>
-                                <input type="checkbox" name="para-length" value="short" /><b><label>&lt;b&gt;</label></b>
-                                <input type="checkbox" name="para-length" value="long" /><label style="font-style: italic;">&lt;i&gt;</label>
+                                <input type="checkbox" name="style-selections" value="p"/><label>&lt;p&gt;</label>
+                                <input type="checkbox" name="style-selections" value="bold" /><b><label>&lt;b&gt;</label></b>
+                                <input type="checkbox" name="style-selections" value="italics" /><label style="font-style: italic;">&lt;i&gt;</label>
                             </div>
                         </div>
                     </div>
@@ -81,10 +72,12 @@
                 <div class="main-area">
                     <div class="search-area">
                         <div class="search-box">
-                            <input type="text" placeholder="All artists & bands...">
-                            <img src="search.svg"></img>
+                            <div id="input-area">
+                                <input type="text" placeholder="All artists & bands..." id="artist-input">
+                            </div>
+                            <img src="search.svg" id="search-img"></img>
                         </div>
-                        <button>Generate Lyrics</button>
+                        <button id="generate-button">Generate Lyrics</button>
                     </div>
                     <div class="main-text">
                         <p>thought i <i>found</i> a <strong>way</strong> <strong>thought</strong> <strong>i</strong> <strong>found</strong> <strong>a</strong> way out but <i>you</i> never <i>go</i> <strong>away</strong> so <i>i</i> <strong>guess</strong> <i>i</i> gotta <i>stay</i> <i>now</i> <i>oh,</i> i <strong>hope</strong> <i>some</i> <strong>day</strong> ill <i>make</i> <strong>it</strong> out <strong>of</strong> <strong>here</strong> even if <strong>it</strong> <i>takes</i> all <strong>night</strong> <strong>or</strong> <i>a</i> hundred years <i>need</i> a place to <i>hide,</i> <strong>but</strong> <i>i</i> cant find <i>one</i> near wanna <i>feel</i> <i>alive,</i> <strong>outside</strong> <i>i</i> <strong>cant</strong> fight my <i>fear</i> isnt <i>it</i> lovely, <i>all</i> <i>alone?</i> <strong>heart</strong> made of <i>glass,</i> <strong>my</strong> mind <strong>of</strong> <strong>stone</strong> tear me to <strong>pieces,</strong> <i>skin</i> to bone <i>hello,</i> <i>welcome</i> <i>home</i> <strong>walking</strong> <strong>out</strong> of time looking for a <strong>better</strong> place somethings on my mind.</p><p>thought <strong>i</strong> <i>found</i> <strong>a</strong> way <strong>thought</strong> <strong>i</strong> found a way out but <strong>you</strong> <strong>never</strong> <strong>go</strong> <i>away</i> <i>so</i> i <strong>guess</strong> <i>i</i> <i>gotta</i> stay <strong>now</strong> oh, <i>i</i> hope some <strong>day</strong> <i>ill</i> <strong>make</strong> <strong>it</strong> <strong>out</strong> of <strong>here</strong> <strong>even</strong> <strong>if</strong> <strong>it</strong> <strong>takes</strong> <strong>all</strong> <strong>night</strong> <i>or</i> <strong>a</strong> <strong>hundred</strong> years <i>need</i> <strong>a</strong> <strong>place</strong> <strong>to</strong> hide, <i>but</i> <i>i</i> <i>cant</i> find one <i>near</i> <i>wanna</i> <strong>feel</strong> <strong>alive,</strong> outside <i>i</i> <strong>cant</strong> fight my fear <i>isnt</i> <i>it</i> lovely, <i>all</i> <strong>alone?</strong> heart <i>made</i> <i>of</i> <strong>glass,</strong> <strong>my</strong> <strong>mind</strong> of <i>stone</i> tear <strong>me</strong> to <i>pieces,</i> skin <strong>to</strong> <i>bone</i> hello, welcome home <i>walking</i> <i>out</i> of time looking <strong>for</strong> a <strong>better</strong> place <strong>somethings</strong> on <strong>my</strong> <strong>mind</strong>.</p><p>thought i <i>found</i> a way <strong>thought</strong> i found a <strong>way</strong> out but <strong>you</strong> <i>never</i> <i>go</i> <strong>away</strong> <strong>so</strong> <strong>i</strong> guess i <strong>gotta</strong> stay <i>now</i> oh, i <strong>hope</strong> some day ill <i>make</i> <i>it</i> <strong>out</strong> <i>of</i> here even if <i>it</i> <strong>takes</strong> <i>all</i> <i>night</i> or a hundred years <i>need</i> <i>a</i> <strong>place</strong> <strong>to</strong> hide, but i cant <i>find</i> <i>one</i> <i>near</i> <strong>wanna</strong> feel alive, <i>outside</i> i <i>cant</i> <strong>fight</strong> <i>my</i> <i>fear</i> <i>isnt</i> <i>it</i> lovely, <strong>all</strong> <i>alone?</i> heart made of glass, my <strong>mind</strong> of <i>stone</i> tear <i>me</i> <strong>to</strong> pieces, <strong>skin</strong> <strong>to</strong> <i>bone</i> hello, welcome home walking <i>out</i> of time looking for a <i>better</i> <i>place</i> <i>somethings</i> on my <strong>mind</strong>.</p><p><i>thought</i> <i>i</i> <strong>found</strong> a way thought i found a <strong>way</strong> out but <strong>you</strong> never <strong>go</strong> <i>away</i> so <i>i</i> <i>guess</i> i <i>gotta</i> <i>stay</i> now oh, <strong>i</strong> <i>hope</i> <i>some</i> day <strong>ill</strong> make it out <strong>of</strong> <i>here</i> even if <i>it</i> <strong>takes</strong> <i>all</i> <strong>night</strong> or <i>a</i> hundred <strong>years</strong> <strong>need</strong> a <i>place</i> <strong>to</strong> <strong>hide,</strong> <i>but</i> <strong>i</strong> cant find <strong>one</strong> <i>near</i> wanna feel alive, outside i cant fight <i>my</i> <strong>fear</strong> <strong>isnt</strong> it <i>lovely,</i> all <i>alone?</i> heart <strong>made</strong> <i>of</i> <strong>glass,</strong> my mind of <strong>stone</strong> <i>tear</i> <strong>me</strong> <strong>to</strong> <strong>pieces,</strong> <strong>skin</strong> to <strong>bone</strong> <i>hello,</i> welcome <strong>home</strong> <strong>walking</strong> out of <strong>time</strong> <strong>looking</strong> <strong>for</strong> a <strong>better</strong> <i>place</i> <i>somethings</i> on my mind.</p>
