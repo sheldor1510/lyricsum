@@ -122,6 +122,104 @@ function autocomplete(inp) {
 }
 
 
+const addStyling = (paramString) => {
+    let selections = format.selections;
+    if (selections.length > 1) {
+        let randomBool = Math.floor(Math.random() * 3)
+        if (randomBool === 1) {
+            if (selections.length > 2) {
+                let anotherRandomBool = Math.floor(Math.random() * 2)
+                if (anotherRandomBool == 1) {
+                    paramString = '<i>' + paramString + '</i>'
+                } else if (anotherRandomBool == 0) {
+                    paramString = '<b>' + paramString + '</b>'
+                }
+            } else {
+                if (selections[1] === "italics") {
+                    paramString = '<i>' + paramString + '</i>'
+                } else if (selections[1] === "bold") {
+                    paramString = '<b>' + paramString + '</b>'
+                }
+            }
+        }
+    }
+    return paramString
+}
+
+const isLetter = (str) => {
+    if (str.length !== 0 && str.match(/[a-z]/i)) {
+        return true 
+    }  else { 
+        return false 
+    }
+}   
+
+const formatText = () => {
+    let paraLength = format.paraLength;
+    let paragraphs = format.paragraphs;
+    let capitalization = format.capitalization;
+    initialText = document.getElementById('lyrics-text').innerText
+    let localInitialText = initialText
+    let htmlToAppend = ''
+    const paraWordLimit = paraLengths[paraLength];
+    const paraLimit = paragraphs;
+    let currentIndex = 0;
+    for(let i = 0; i < paraLimit; i++) {
+        console.log(currentIndex);
+        let para = ''
+        let wordArray = localInitialText.split(' ');
+        console.log(wordArray.length);
+        let limit = currentIndex + paraWordLimit
+        for(let j = currentIndex; j < limit; j++) {
+            if ((wordArray.length - j) == 1) {
+                console.log("hello");
+                limit = paraWordLimit - para.split(" ").length
+                currentIndex = 0;
+                j = 0;
+                console.log(j);
+            } else {
+                if (j == limit - 1) {
+                    const charToCheck = wordArray[j][wordArray[j].length - 1]
+                    console.log(charToCheck);
+                    const isLetterBool = isLetter(charToCheck)
+                    console.log(isLetterBool);
+                    if (isLetterBool) {
+                        para += addStyling(wordArray[j]) + '.'
+                    } else {
+                        wordArray[j] = wordArray[j].slice(0, -1)
+                        console.log(wordArray[j]);
+                        para += addStyling(wordArray[j]) + '.'
+                    }
+                } else if (j == currentIndex) {
+                    wordArray[j] = wordArray[j].slice(0, 1).toUpperCase() + wordArray[j].slice(1)
+                    para += addStyling(wordArray[j]) + ' '
+                } else {
+                    para += addStyling(wordArray[j]) + ' '
+                }
+                currentIndex++
+            }
+        }
+        if (capitalization == "Aa") { 
+            para = para.toLowerCase()
+            let repara = ''
+            para.split("").forEach((char, index) => {
+                if (index == 0) {
+                    repara += char.toUpperCase()
+                } else {
+                    repara += char
+                }
+            })
+            para = repara
+        } else if (capitalization == "aa") { para = para.toLowerCase() }
+        else if (capitalization == "AA") { para = para.toUpperCase() }
+        para = '<p>' + para + '</p>'
+        console.log(para);
+        htmlToAppend += para
+    }
+    console.log(htmlToAppend);
+    document.getElementById('lyrics-text').innerHTML = htmlToAppend
+}
+
 window.onload = () => {
     var slider = document.getElementById("range");
     var output = document.getElementsByClassName('para-count')[0];
@@ -130,8 +228,46 @@ window.onload = () => {
         output.innerHTML = this.value;
         format.paragraphs = this.value;
         inflateFormatting();
+        formatText();
     }
     autocomplete(document.getElementById("artist-input"));
+    document.getElementById('generate-button').addEventListener('click', () => {
+        console.time('GenerationTime');
+        if (document.getElementById('artist-input').value.trim() == suggestionFilled) {
+            filled = true;
+        } else {
+            filled = false;
+        }
+        if (filled) {
+            document.getElementById('generate-button').disabled = true;
+            fetch(apiBaseURL + '/generate?query=' + document.getElementById('artist-input').value.trim())
+            .then(async (response) => {
+                const resp = await response.json()
+                console.log(resp);
+                document.getElementById('lyrics-text').innerText = resp.lyrics
+                console.timeEnd('GenerationTime');
+                formatText();
+                document.getElementById('song-img').src = resp.currentSong.song_art_image_thumbnail_url
+                let songTitle = resp.currentSong.title
+                let songArtist = resp.searchQuery
+                if (songTitle.length > 21) {
+                    songTitle = songTitle.slice(0, 21) + "..."
+                }
+                if (songArtist.length > 21) {
+                    songArtist = songArtist.slice(0, 21) + "..."
+                }
+                document.getElementById('song-title').innerText = songTitle
+                document.getElementById('song-artist').innerText = songArtist
+                document.getElementById('song-link').href = resp.currentSong.url
+                document.getElementById('generate-button').disabled = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        } else {
+            alert('Please pick a suggestion');
+        }
+    })
     window.addEventListener('click', (e) => {
         if (e.target.id === "cross-icon") {
             document.getElementById('artist-input').style.display = 'block'
@@ -142,10 +278,12 @@ window.onload = () => {
         if (["short", "medium", "long"].includes(e.target.value)) {
             format.paraLength = e.target.value;
             inflateFormatting();
+            formatText();
         }
         if (["aa", "AA", "Aa"].includes(e.target.value)) {
             format.capitalization = e.target.value;
             inflateFormatting();
+            formatText();
         }
         if (["p", "bold", "italics"].includes(e.target.value)) {
             if (e.target.value === "p") {
@@ -170,6 +308,7 @@ window.onload = () => {
                 }
             }
             inflateFormatting();
+            formatText();
         }
     })
     inflateFormatting()
