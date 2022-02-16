@@ -341,3 +341,12 @@ button:disabled {
     opacity: 0.5;
     cursor: initial;
 }
+
+iframe {
+    width: 110%;
+    height: 48vw;
+    border: none;
+    position: relative;
+    top: -15vw;
+    left: -5vw;
+}

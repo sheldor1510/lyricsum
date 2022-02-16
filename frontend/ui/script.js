@@ -220,6 +220,85 @@ const formatText = () => {
     document.getElementById('lyrics-text').innerHTML = htmlToAppend
 }
 
+const inflateSong = (data) => {
+    document.getElementById('lyrics-text').innerText = data.lyrics
+    formatText();
+    document.getElementById('song-img').src = data.currentSong.song_art_image_thumbnail_url
+    let songTitle = data.currentSong.title
+    let songArtist = data.searchQuery
+    if (songArtist == "random") {
+        songArtist = data.currentSong.artist_names
+    }
+    if (songTitle.length > 24) {
+        songTitle = songTitle.slice(0, 24) + "..."
+    }
+    if (songArtist.length > 24) {
+        songArtist = songArtist.slice(0, 24) + "..."
+    }
+    document.getElementById('song-title').innerText = songTitle
+    document.getElementById('song-artist').innerText = songArtist
+    document.getElementById('song-link').href = data.currentSong.url
+}
+
+const logSong = (data) => {
+    let log = {}
+    log.song = data.currentSong.title
+    log.artist = data.currentSong.artist_names
+    log.paragraphs = format.paragraphs
+    log.para_length = format.paraLength
+    log.capitalization = format.capitalization
+    let selectionString = ''
+    format.selections.forEach(selection => {
+        selectionString += selection + ','
+    })
+    log.selections = selectionString
+    log.logged_at = new Date().toLocaleString()
+    console.log(log)
+    fetch(apiBaseURL + '/log', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(log)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+}
+
+const generateInputSong = () => {
+    document.getElementById('generate-button').disabled = true;
+    document.getElementById('lyrics-text').innerHTML = '<iframe src="https://cdn.discordapp.com/attachments/766636913343463454/943389634052894760/loader-ly.gif" scrolling="no" id="loader"></iframe>';
+    fetch(apiBaseURL + '/generate?query=' + document.getElementById('artist-input').value.trim())
+    .then(async (response) => {
+        const resp = await response.json()
+        console.timeEnd('GenerationTime');
+        inflateSong(resp);
+        document.getElementById('generate-button').disabled = false;
+        document.body.style.overflowY = 'initial';
+        logSong(resp);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
+const generateRandomSong = () => {
+    document.getElementById('generate-button').disabled = true;
+    document.getElementById('lyrics-text').innerHTML = '<iframe src="https://cdn.discordapp.com/attachments/766636913343463454/943389634052894760/loader-ly.gif" scrolling="no" id="loader"></iframe>';
+    fetch(apiBaseURL + '/random')
+    .then(async (response) => {
+        const resp = await response.json()
+        console.timeEnd('GenerationTime');
+        inflateSong(resp);
+        document.getElementById('generate-button').disabled = false;
+        document.body.style.overflowY = 'initial';
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
 window.onload = () => {
     var slider = document.getElementById("range");
     var output = document.getElementsByClassName('para-count')[0];
@@ -230,43 +309,38 @@ window.onload = () => {
         inflateFormatting();
         formatText();
     }
+    document.body.style.overflowY = 'hidden';
     autocomplete(document.getElementById("artist-input"));
     document.getElementById('generate-button').addEventListener('click', () => {
         console.time('GenerationTime');
+        document.body.style.overflowY = 'hidden';
         if (document.getElementById('artist-input').value.trim() == suggestionFilled) {
-            filled = true;
+            generateInputSong();
         } else {
-            filled = false;
+            generateRandomSong();
         }
-        if (filled) {
-            document.getElementById('generate-button').disabled = true;
-            fetch(apiBaseURL + '/generate?query=' + document.getElementById('artist-input').value.trim())
-            .then(async (response) => {
-                const resp = await response.json()
-                console.log(resp);
-                document.getElementById('lyrics-text').innerText = resp.lyrics
-                console.timeEnd('GenerationTime');
-                formatText();
-                document.getElementById('song-img').src = resp.currentSong.song_art_image_thumbnail_url
-                let songTitle = resp.currentSong.title
-                let songArtist = resp.searchQuery
-                if (songTitle.length > 21) {
-                    songTitle = songTitle.slice(0, 21) + "..."
-                }
-                if (songArtist.length > 21) {
-                    songArtist = songArtist.slice(0, 21) + "..."
-                }
-                document.getElementById('song-title').innerText = songTitle
-                document.getElementById('song-artist').innerText = songArtist
-                document.getElementById('song-link').href = resp.currentSong.url
-                document.getElementById('generate-button').disabled = false;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    })
+    document.getElementById('copy-button').addEventListener('click', () => {
+        let copyText = ''
+        if (format.selections.length > 0) {
+            copyText = document.getElementById('lyrics-text').innerHTML
         } else {
-            alert('Please pick a suggestion');
+            copyText = document.getElementById('lyrics-text').innerText
         }
+        let copy = document.createElement('textarea');
+        copy.value = copyText;
+        document.body.appendChild(copy);
+        copy.select();
+        document.execCommand("copy");
+        document.body.removeChild(copy);
+        const notyf = new Notyf({
+            duration: 1500,
+            position: { x: "right", y: "top" },
+            closeBtn: {
+                text: 'X',
+            }
+        });
+        notyf.success('Copied to clipboard!');
     })
     window.addEventListener('click', (e) => {
         if (e.target.id === "cross-icon") {
@@ -311,5 +385,6 @@ window.onload = () => {
             formatText();
         }
     })
-    inflateFormatting()
+    inflateFormatting();
+    generateRandomSong();
 }
