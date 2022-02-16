@@ -300,6 +300,22 @@ const generateRandomSong = () => {
 }
 
 window.onload = () => {
+    if (screen.width < 600) {
+        document.getElementById('web-view').remove();
+        document.getElementById('mobile-view').style.display = 'block';
+    } else {
+        document.getElementById('web-view').style.display = 'block';
+        document.getElementById('mobile-view').remove();
+    }
+
+    window.addEventListener("resize", () => {
+        if (screen.width < 600) {
+            document.getElementById('web-view').style.display = 'none';
+        } else {
+            document.getElementById('web-view').style.display = 'block';
+        }
+    })
+
     var slider = document.getElementById("range");
     var output = document.getElementsByClassName('para-count')[0];
     output.innerHTML = slider.value;
@@ -383,6 +399,18 @@ window.onload = () => {
             }
             inflateFormatting();
             formatText();
+        }
+        if (e.target.id == "toggle-down") {
+            document.getElementById('toggle-down').style.display = 'none'
+            document.getElementById('toggle-up').style.display = 'block'
+            document.getElementById('options').style.display = 'block'
+            document.getElementById('main-area').style.height = '168vw'
+        }
+        if (e.target.id == "toggle-up") {
+            document.getElementById('toggle-down').style.display = 'block'
+            document.getElementById('toggle-up').style.display = 'none'
+            document.getElementById('options').style.display = 'none'
+            document.getElementById('main-area').style.height = '90vw'
         }
     })
     inflateFormatting();

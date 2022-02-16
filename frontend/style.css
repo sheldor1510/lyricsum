@@ -93,6 +93,7 @@ main {
 
 .song-card img {
     height: 4.3vw;
+    width: 4.3vw;
     margin-top: 1vw;
     margin-left: 1.5vw;
     filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.22));
@@ -349,4 +350,274 @@ iframe {
     position: relative;
     top: -15vw;
     left: -5vw;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding-left: 3vw;
+        padding-right: 4vw;
+        padding-top: 5vw;
+    }
+
+    main {
+        /* background: white; */
+        height: 90vh;
+        width: 90vw;
+    }
+
+    .top-bar img {
+        height: 7vw;
+    }
+    
+    .top-bar h2 {
+        font-size: 4vw;
+        margin-top: 1vw;
+        font-style: normal;
+        font-weight: normal;
+    }
+
+    .main-area {
+        width: 100%;
+        height: 90vw;
+        margin-left: 0%;
+        /* background-color: bisque; */
+        margin-top: 5vw;
+    }
+
+    .search-area {
+        display: block;
+        justify-content: center;
+    }
+    
+    .search-box {
+        width: 100%;
+        height: 10vw;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .search-box input {
+        height: 3vw;
+        margin-top: 3vw;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 3.5vw;
+        margin-left: 5vw;
+        border: none;
+        width: 80%;
+    }
+    
+    .search-box input:focus {
+        outline: none;
+    }
+    
+    .search-box img {
+        height: 4vw;
+        margin-top: 2.5vw;
+        margin-right: 5vw;
+    }
+
+    .autocomplete-items div {
+        font-size: 3.5vw;
+        padding: 3vw;
+        padding-left: 5vw;
+        cursor: pointer;
+        color: #000000;
+        background: #FFFFFF;
+        width: 82vw;
+    }
+
+    .tag {
+        margin-left: 5vw;
+        background: #918EFF;
+        border-radius: 4px;
+        /* transform: matrix(1, 0, 0, -1, 0, 0); */
+        font-family: 'Be Vietnam Pro', sans-serif;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        font-size: 3vw;
+        width: fit-content;
+        height: 5.5vw;
+        padding-left: 2vw;
+        padding-top: 1vw;
+        margin-top: 1.8vw;
+    }
+
+    .tag img {
+        height: 3vw;
+        margin-top: 0.5vw;
+        margin-left: 2vw !important;
+    }
+
+    .search-area button {
+        height: 9vw;
+        width: 100%;
+        background: #918EFF;
+        border-radius: 5px;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 2.8vw;
+        color: white;
+        border: none;
+        margin-top: 4vw;
+    }
+
+    .song-card {
+        width: 100%;
+        height: 23vw;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 12px rgb(0 0 0 / 8%);
+        border-radius: 10px;
+        margin-top: 4vw;
+    }
+
+    .song-card img {
+        height: 16vw;
+        width: 16vw;
+        margin-top: 3.5vw;
+        margin-left: 5vw;
+        filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.22));
+        border-radius: 10px;
+    }
+
+    .song-card h3 {
+        font-family: 'Vidaloka', serif;
+        font-size: 5vw;
+        margin-top: 5vw;
+        font-style: normal;
+        font-weight: normal;
+        margin-left: 5vw;
+    }
+
+    .song-card p {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 3vw;
+        margin-top: -2.5vw;
+        color: #000000;
+        opacity: 0.5;
+        margin-left: 5vw;
+    }
+
+    .format-bar {
+        width: 97%;
+        height: fit-content;
+        margin-top: 5vw;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 12px rgb(0 0 0 / 8%);
+        border-radius: 10px;
+        padding-left: 3vw;
+    }
+
+    .heading p {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-style: bold;
+        font-weight: 600;
+        font-size: 3.5vw;
+        margin-top: 5vw;
+    }
+
+    .para-count {
+        border: 2px solid #918EFF;
+        box-sizing: border-box;
+        border-radius: 5px;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-style: bold;
+        font-weight: 600;
+        font-size: 3.2vw;
+        width: 12vw;
+        text-align: center;
+        height: 6vw;
+        padding: 0.5vw;
+        margin-top: 4vw;
+        margin-left: 4vw;    
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 90%;
+        height: 1vw;
+        border-radius: 6px;
+        background: #d2d2d2;
+        outline: none;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 5vw;
+        height: 5vw;
+        border-radius: 50%;
+        background: #918EFF;
+        cursor: pointer;
+    }
+
+    .choices {
+        width: 90% !important;
+    }
+
+    input[type="radio"] {
+        accent-color: mediumslateblue;
+        height: 5vw;
+        width: 5vw;
+        margin-right: 1.5vw;
+        vertical-align: sub;
+    }
+
+    input[type="checkbox"] {
+        accent-color: mediumslateblue;
+        height: 5vw;
+        width: 5vw;
+        margin-right: 1.5vw;
+        vertical-align: sub;
+    }
+
+    label {
+        font-size: 3.2vw;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        margin-right: 5vw;
+    }
+
+    .copy-button {
+        background: #918EFF;
+        border-radius: 5px;
+        width: 100%;
+        height: 9vw;
+        margin-top: 5vw;
+        border: none;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 2.8vw;
+        color: white;
+        font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .copy-button img {
+        height: 3vw;
+    }
+
+    .main-text {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 4vw;
+        margin-top: -5vw;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    iframe {
+        width: 100%;
+        height: 250vw;
+        border: none;
+        position: relative;
+        top: -80vw;
+        left: -10vw;
+    }
 }
