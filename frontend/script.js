@@ -1,7 +1,7 @@
 const ls = window.localStorage;
 let suggestionFilled = null;
 let filled = false;
-let apiBaseURL = 'http://localhost:5000';
+let apiBaseURL = 'https://lyricsum.herokuapp.com';
 let initialText = '';
 const paraLengths = { short: 50, medium: 100, long: 200 }
 let format = {
@@ -311,10 +311,8 @@ window.onload = () => {
     window.addEventListener("resize", () => {
         if (screen.width < 600) {
             document.getElementById('web-view').style.display = 'none';
-            document.getElementById('mobile-view').style.display = 'block';
         } else {
             document.getElementById('mobile-view').style.display = 'none';
-            document.getElementById('web-view').style.display = 'block';
         }
     })
 
