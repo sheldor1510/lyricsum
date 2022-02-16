@@ -5,9 +5,9 @@ let apiBaseURL = 'https://lyricsum.herokuapp.com';
 let initialText = '';
 const paraLengths = { short: 50, medium: 100, long: 200 }
 let format = {
-    paragraphs: 7, 
+    paragraphs: 5, 
     paraLength: "short", 
-    capitalization: "aa", 
+    capitalization: "Aa", 
     selections: []
 }
 
