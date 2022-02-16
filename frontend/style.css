@@ -81,6 +81,10 @@ main {
     font-family: 'Be Vietnam Pro', sans-serif;
 }
 
+.copy-button:hover {
+    background-color: #7674D4;
+}
+
 .copy-button img {
     height: 1.1vw;
     margin-right: 0.5vw;
@@ -258,6 +262,10 @@ label {
     border: none;
 }
 
+.search-area button:hover {
+    background-color: #7674D4;
+}
+
 .main-text {
     font-family: 'Be Vietnam Pro', sans-serif;
     font-style: normal;
@@ -350,6 +358,21 @@ iframe {
     position: relative;
     top: -15vw;
     left: -5vw;
+}
+
+#no-results {
+    color: black !important;
+    opacity: 0.5;
+}
+
+#no-results:hover {
+    color: black !important;
+    opacity: 0.5;
+}
+
+#no-results:active {
+    color: black !important;
+    opacity: 0.5;
 }
 
 @media (max-width: 800px) {
@@ -599,6 +622,14 @@ iframe {
 
     .copy-button img {
         height: 3vw;
+    }
+
+    .copy-button:hover {
+        background-color: #7674D4;
+    }
+
+    .search-area button:hover {
+        background-color: #7674D4;
     }
 
     .main-text {

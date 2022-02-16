@@ -61,20 +61,28 @@ function autocomplete(inp) {
                 //console.log(resp.artists);
                 let arr = resp.artists.slice(0, 5);
                 document.getElementById('search-img').style.display = 'none'
-                for (i = 0; i < arr.length; i++) {
+                console.log(arr.length)
+                if (arr.length == 0) {
                     b = document.createElement("DIV");
-                    b.innerHTML += arr[i].substr(0, val.length) + arr[i].substr(val.length);
-                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                    b.addEventListener("click", function(e) {
-                        document.getElementById('search-img').style.display = 'block'
-                        inp.value = this.getElementsByTagName("input")[0].value;
-                        document.getElementById('input-area').innerHTML += `<div class="tag">${inp.value}<img style="margin-left: 1vw;" id="cross-icon" src="assets/cross.svg"></img></div>`
-                        document.getElementById("artist-input").style.display = 'none'
-                        document.getElementById("artist-input").value = inp.value
-                        suggestionFilled = inp.value;
-                        closeAllLists();
-                    });
+                    b.id = "no-results"
+                    b.innerHTML += 'No results found'
                     a.appendChild(b);
+                } else {
+                    for (i = 0; i < arr.length; i++) {
+                        b = document.createElement("DIV");
+                        b.innerHTML += arr[i].substr(0, val.length) + arr[i].substr(val.length);
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        b.addEventListener("click", function(e) {
+                            document.getElementById('search-img').style.display = 'block'
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            document.getElementById('input-area').innerHTML += `<div class="tag">${inp.value}<img style="margin-left: 1vw;" id="cross-icon" src="assets/cross.svg"></img></div>`
+                            document.getElementById("artist-input").style.display = 'none'
+                            document.getElementById("artist-input").value = inp.value
+                            suggestionFilled = inp.value;
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
                 }
             })
             .catch(error => console.log('error', error));
@@ -354,7 +362,15 @@ window.onload = () => {
             position: { x: "right", y: "top" },
             closeBtn: {
                 text: 'X',
-            }
+            },
+            types: [
+                {
+                  type: 'success',
+                  background: 'mediumslateblue',
+                  duration: 1500,
+                  dismissible: true
+                }
+            ]
         });
         notyf.success('Copied to clipboard!');
     })

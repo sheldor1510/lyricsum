@@ -19,13 +19,15 @@
             <div id="web-view" style="display: none; margin-bottom: -5vw;">
                 <div class="inline">
                     <div class="side-bar">
-                        <div class="song-card">
-                            <a href="" target="_blank" id="song-link"><img src="https://assets.genius.com/images/default_cover_image.png?1644619310" id="song-img"></img></a>
-                            <div class="song-info">
-                                <h3 id="song-title">Song Title</h3>
-                                <p id="song-artist">Song Artist</p>
+                        <a href="" target="_blank" id="song-link" style="text-decoration: none; color: black">
+                            <div class="song-card">
+                                <img src="https://assets.genius.com/images/default_cover_image.png?1644619310" id="song-img"></img>
+                                <div class="song-info">
+                                    <h3 id="song-title">Song Title</h3>
+                                    <p id="song-artist">Song Artist</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="format-bar">
                             <div class="format">
                                 <div class="heading">
@@ -78,7 +80,7 @@
                         <div class="search-area">
                             <div class="search-box">
                                 <div id="input-area">
-                                    <input type="text" placeholder="All artists & bands..." id="artist-input">
+                                    <input type="text" placeholder="All artists & bands..." id="artist-input" autocomplete="off">
                                 </div>
                                 <img src="assets/search.svg" id="search-img"></img>
                             </div>
@@ -94,19 +96,21 @@
                     <div class="search-area">
                         <div class="search-box">
                             <div id="input-area">
-                                <input type="text" placeholder="All artists & bands..." id="artist-input">
+                                <input type="text" placeholder="All artists & bands..." id="artist-input" autocomplete="off">
                             </div>
                             <img src="assets/search.svg" id="search-img"></img>
                         </div>
                         <button id="generate-button">Generate Lyrics</button>
                     </div>
-                    <div class="song-card">
-                        <a href="" target="_blank" id="song-link"><img src="https://assets.genius.com/images/default_cover_image.png?1644619310" id="song-img"></img></a>
-                        <div class="song-info">
-                            <h3 id="song-title">Song Title</h3>
-                            <p id="song-artist">Song Artist</p>
+                    <a href="" target="_blank" id="song-link" style="text-decoration: none; color: black">
+                        <div class="song-card">
+                            <img src="https://assets.genius.com/images/default_cover_image.png?1644619310" id="song-img"></img>
+                            <div class="song-info">
+                                <h3 id="song-title">Song Title</h3>
+                                <p id="song-artist">Song Artist</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <div class="format-bar">
                             <div class="format" style="margin-bottom: -6vw;">
                                 <div class="heading" style="display: flex; justify-content: space-between">
