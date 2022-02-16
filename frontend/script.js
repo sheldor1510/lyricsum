@@ -311,7 +311,9 @@ window.onload = () => {
     window.addEventListener("resize", () => {
         if (screen.width < 600) {
             document.getElementById('web-view').style.display = 'none';
+            document.getElementById('mobile-view').style.display = 'block';
         } else {
+            document.getElementById('mobile-view').style.display = 'none';
             document.getElementById('web-view').style.display = 'block';
         }
     })
