@@ -3,22 +3,90 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <script src="script.js"></script>
+        <title>Lyricsum</title>
+        <link rel="icon" href="assets/favicon.svg" type="image/x-icon">
+    </head>
     <body>
-        <div class="autocomplete" style="width:500px;">
-            <div class="input-wrapper" id="input-wrapper">
-                <input id="myInput" type="text" name="myCountry" placeholder="All artists & bands...">
+        <main>
+            <div class="top-bar">
+                <img src="assets/logo.svg"></img>
+                <a href="https://github.com/sheldor1510/lyricsum/blob/main/README.md" target="_blank" style="text-decoration: none; color: black;"><h2>about</h2></a>
             </div>
-        </div>
-        <button id="check">get lyrics</button>
-        <button id="copy">copy text</button>
-        <br><br>
-        <div>
-            <img id="song-img">
-            <a id="song-link" target="_blank"><h5 id="song-title"></h5></a>
-        </div>
-        <div id="lyrics-text"></div>
+            <div class="inline">
+                <div class="side-bar">
+                    <div class="song-card">
+                        <a href="" target="_blank" id="song-link"><img src="https://assets.genius.com/images/default_cover_image.png?1644619310" id="song-img"></img></a>
+                        <div class="song-info">
+                            <h3 id="song-title">Song Title</h3>
+                            <p id="song-artist">Song Artist</p>
+                        </div>
+                    </div>
+                    <div class="format-bar">
+                        <div class="format">
+                            <div class="heading">
+                                <p>Paragraphs</p>
+                                <div class="para-count" id="para-count">
+                                    4
+                                </div>
+                            </div>
+                            <div class="choices">
+                                <input type="range" min="1" max="25" value="5" class="slider" id="range">
+                            </div>
+                        </div>
+                        <div class="format">
+                            <div class="heading">
+                                <p>Paragraph Length</p>
+                            </div>
+                            <div class="choices" style="width: 110%; margin-left: -0.3vw">
+                                <input type="radio" name="para-length" value="medium" /><label>Medium</label>
+                                <input type="radio" name="para-length" value="short" /><label>Short</label>
+                                <input type="radio" name="para-length" value="long" /><label>Long</label>
+                            </div>
+                        </div>
+                        <div class="format">
+                            <div class="heading">
+                                <p>Capitalization</p>
+                            </div>
+                            <div class="choices" style="width: 110%; margin-left: -0.3vw">
+                                <input type="radio" name="capitalization" value="Aa" /><label>Aa</label>
+                                <input type="radio" name="capitalization" value="AA" /><label>AA</label>
+                                <input type="radio" name="capitalization" value="aa" /><label>aa</label>
+                            </div>
+                        </div>
+                        <div class="format">
+                            <div class="heading">
+                                <p>HTML Options</p>
+                            </div>
+                            <div class="choices" style="width: 110%; margin-left: -0.3vw">
+                                <input type="checkbox" name="style-selections" value="p"/><label>&lt;p&gt;</label>
+                                <input type="checkbox" name="style-selections" value="bold" /><b><label>&lt;b&gt;</label></b>
+                                <input type="checkbox" name="style-selections" value="italics" /><label style="font-style: italic;">&lt;i&gt;</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="copy-button" id="copy-button">
+                        <img src="assets/copy.svg"></img>
+                        Copy Text                    
+                    </button>
+                </div>
+                <div class="main-area">
+                    <div class="search-area">
+                        <div class="search-box">
+                            <div id="input-area">
+                                <input type="text" placeholder="All artists & bands..." id="artist-input">
+                            </div>
+                            <img src="assets/search.svg" id="search-img"></img>
+                        </div>
+                        <button id="generate-button">Generate Lyrics</button>
+                    </div>
+                    <div class="main-text" id="lyrics-text"></div>
+                    <br>
+                </div>
+            </div>
+        </main>
     </body>
 </html>
