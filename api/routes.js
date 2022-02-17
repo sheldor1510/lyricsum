@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const geniusAPI = require('genius-lyrics-api');
 const axios = require('axios');
+const { randomSongs } = require('./constants')
 
 router.get('/', (req, res) => {
     res.send('API is working!');
@@ -90,7 +91,8 @@ router.get('/random', (req, res) => {
         })
     })
     .catch(err => {
-        const url = `https://api.genius.com/songs/2471960?access_token=${process.env.GENIUS_API_KEY}`
+        let randomIndex = getRandomInt(1, randomSongs.length-1)
+        const url = `https://api.genius.com/songs/${randomSongs[randomIndex]}?access_token=${process.env.GENIUS_API_KEY}`
         axios.get(url)
         .then(response => {
             console.log(response.status)

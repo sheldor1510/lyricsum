@@ -2,6 +2,7 @@ const ls = window.localStorage;
 let suggestionFilled = null;
 let filled = false;
 let apiBaseURL = 'https://lyricsum.herokuapp.com';
+// let apiBaseURL = 'http://localhost:5000';
 let initialText = '';
 const paraLengths = { short: 50, medium: 100, long: 200 }
 let format = {
@@ -49,7 +50,10 @@ function autocomplete(inp) {
         timer = setTimeout(() => {
             var a, b, i, val = this.value;
             closeAllLists();
-            if (!val) { return false;}
+            if (!val) { 
+                document.getElementById('search-img').style.display = 'block'
+                return false;
+            }
             currentFocus = -1;
             a = document.createElement("DIV");
             a.setAttribute("id", this.id + "autocomplete-list");
@@ -66,6 +70,7 @@ function autocomplete(inp) {
                     b = document.createElement("DIV");
                     b.id = "no-results"
                     b.innerHTML += 'No results found'
+                    b.style.pointerEvents = 'none'
                     a.appendChild(b);
                 } else {
                     for (i = 0; i < arr.length; i++) {
@@ -334,10 +339,18 @@ window.onload = () => {
         formatText();
     }
     document.body.style.overflowY = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    if (screen.width < 600) {
+        document.getElementById('contents').style.overflowX = 'hidden';
+    }
     autocomplete(document.getElementById("artist-input"));
     document.getElementById('generate-button').addEventListener('click', () => {
         console.time('GenerationTime');
         document.body.style.overflowY = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        if (screen.width < 600) {
+            document.getElementById('contents').style.overflowX = 'hidden';
+        }
         if (document.getElementById('artist-input').value.trim() == suggestionFilled) {
             generateInputSong();
         } else {
