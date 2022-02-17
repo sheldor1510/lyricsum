@@ -155,6 +155,32 @@ main {
     margin-left: 1vw;
 }
 
+.para-count input {
+    width: 4vw;
+    height: 1.3vw;
+    border: none;
+    background: transparent;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-style: bold;
+    font-weight: 600;
+    font-size: 1.1vw;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.1vw;
+    margin-top: -1.4vw;
+    margin-left: -0.3vw;
+}
+
+.para-count input:focus {
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .slidecontainer {
     width: 100%;
 }
@@ -559,6 +585,22 @@ iframe {
         padding: 0.5vw;
         margin-top: 4vw;
         margin-left: 4vw;    
+    }
+
+    .para-count input {
+        width: 12vw;
+        height: 6vw;
+        border: none;
+        background: transparent;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-style: bold;
+        font-weight: 600;
+        font-size: 3.2vw;
+        text-align: center;
+        border-radius: 5px;
+        padding: 0.1vw;
+        margin-top: -1.4vw;
+        margin-left: -1vw;
     }
 
     .slider {

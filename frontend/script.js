@@ -23,7 +23,7 @@ if (ls.getItem('formatData') === null) {
 
 const inflateFormatting = () => {
     ls.setItem('formatData', JSON.stringify(format));
-    document.getElementById('para-count').innerHTML = format.paragraphs;
+    document.getElementById('para-count').value = format.paragraphs;
     document.getElementById('range').value = format.paragraphs;
     document.querySelector('input[value="' + format.paraLength + '"]').checked = true;
     document.querySelector('input[value="' + format.capitalization + '"]').checked = true;
@@ -329,11 +329,46 @@ window.onload = () => {
         }
     })
 
+    const notyf = new Notyf({
+        duration: 1500,
+        position: { x: "right", y: "top" },
+        closeBtn: {
+            text: 'X',
+        },
+        types: [
+            {
+              type: 'success',
+              background: 'mediumslateblue',
+              duration: 1500,
+              dismissible: true
+            },
+            {
+                type: 'error',
+                background: 'mediumslateblue',
+                duration: 2000,
+                dismissible: true
+            }
+        ]
+    });
+
     var slider = document.getElementById("range");
-    var output = document.getElementsByClassName('para-count')[0];
+    var output = document.getElementById('para-count');
     output.innerHTML = slider.value;
     slider.oninput = function() {
-        output.innerHTML = this.value;
+        output.value = this.value;
+        format.paragraphs = this.value;
+        inflateFormatting();
+        formatText();
+    }
+    output.onchange = function() {
+        if (this.value > 25) {
+            notyf.error('Maximum number of paragraphs is 25.');
+            this.value = 25;
+        } else if (this.value < 1) {
+            notyf.error('Minimum number of paragraphs is 1.');
+            this.value = 1;
+        }
+        slider.value = this.value;
         format.paragraphs = this.value;
         inflateFormatting();
         formatText();
@@ -370,21 +405,6 @@ window.onload = () => {
         copy.select();
         document.execCommand("copy");
         document.body.removeChild(copy);
-        const notyf = new Notyf({
-            duration: 1500,
-            position: { x: "right", y: "top" },
-            closeBtn: {
-                text: 'X',
-            },
-            types: [
-                {
-                  type: 'success',
-                  background: 'mediumslateblue',
-                  duration: 1500,
-                  dismissible: true
-                }
-            ]
-        });
         notyf.success('Copied to clipboard!');
     })
     window.addEventListener('click', (e) => {
