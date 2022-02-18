@@ -12,7 +12,7 @@ Generate lyrics of songs by specific artists and bands.
 
 <img src="https://user-images.githubusercontent.com/44090243/154624683-a03926a8-6439-479d-b741-d9796881df2d.gif" width="80%" height="80%"></img>
 
-Allows you to customize the text to your use case using the various formatting options. 
+Customize the text for your use case using the various formatting options.
 
 <img src="https://user-images.githubusercontent.com/44090243/154624681-f2d84917-eebe-4a8e-8037-757dbb12a196.gif" width="80%" height="80%"></img>
 
