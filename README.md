@@ -8,7 +8,7 @@ Check it out at <a href="https://lyricsum.com" target="_blank">lyricsum.com</a>.
 Being bored of looking at the same lorem ipsum all the time, we wanted to add some variety, so, being melophiles, we decided on songs as the alternative.
 
 ## Features
-Generates lyrics of a song made by the selected artist
+Generate lyrics of songs by specific artists and bands.
 
 <img src="https://user-images.githubusercontent.com/44090243/154624683-a03926a8-6439-479d-b741-d9796881df2d.gif" width="80%" height="80%"></img>
 
@@ -16,7 +16,7 @@ Allows you to customize the text to your use case using the various formatting o
 
 <img src="https://user-images.githubusercontent.com/44090243/154624681-f2d84917-eebe-4a8e-8037-757dbb12a196.gif" width="80%" height="80%"></img>
 
-Generates lyrics of a random song (if no artist is selected)
+Generates lyrics of a random song (if no artist is selected).
 
 <img src="https://user-images.githubusercontent.com/44090243/154624679-87426d6c-a9ee-4683-aa6b-d790018a16ef.gif" width="80%" height="80%"></img>
 
