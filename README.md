@@ -1,3 +1,4 @@
+[![Lorem Ipsum but it's song lyrics 🎵: Lyricsum](https://cdn.discordapp.com/attachments/805828142274052116/944130591677362196/Banner.png)](https://lyricsum.com)
 ## What is Lyricsum?
 Lyricsum is a new way to generate placeholder text. It's a website that takes the lyrics of your favorite artists' songs and converts them into placeholder text which can be further customized using the format options available.
 
@@ -29,6 +30,6 @@ Feel free to drop suggestions or report any bugs you might face in the [issues](
 <table>
   <tr>
     <td align="center"><a href="https://github.com/sheldor1510"><img src="https://github.com/sheldor1510.png" width="100px;"><br /><sub><a href="https://anshulsaha.me" target="_blank"><b>Anshul Saha</b></a></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/ishaandas"><img src="https://github.com/ishaanndas.png" width="100px;"><br /><sub><a href="https://ishaandas.com/" target="_blank"><b>Ishaan Das</b></a></sub></a><br/></td>
+    <td align="center"><a href="https://github.com/ishaanndas"><img src="https://github.com/ishaanndas.png" width="100px;"><br /><sub><a href="https://ishaandas.com/" target="_blank"><b>Ishaan Das</b></a></sub></a><br/></td>
   </tr>
 </table>
