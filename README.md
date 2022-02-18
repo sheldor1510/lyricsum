@@ -5,7 +5,7 @@ Lyricsum is a new way to generate placeholder text. It's a website that takes th
 Check it out at <a href="https://lyricsum.com" target="_blank">lyricsum.com</a>.
 
 ## Why?
-Being bored of looking at the same lorem ipsum all the time, we wanted to add some variety and being melophiles, we decided on songs as the alternative.
+Being bored of looking at the same lorem ipsum all the time, we wanted to add some variety, so, being melophiles, we decided on songs as the alternative.
 
 ## Features
 Generates lyrics of a song made by the selected artist
