@@ -1,4 +1,4 @@
-[![Lorem Ipsum but it's song lyrics 🎵: Lyricsum](https://cdn.discordapp.com/attachments/805828142274052116/944130591677362196/Banner.png)](https://lyricsum.com)
+[![Lorem Ipsum but it's song lyrics 🎵: Lyricsum](/frontend/assets/banner-ly.png)](https://lyricsum.com)
 ## What is Lyricsum?
 Lyricsum is a new way to generate placeholder text. It's a website that takes the lyrics of your favorite artists' songs and converts them into placeholder text which can be further customized using the format options available.
 
