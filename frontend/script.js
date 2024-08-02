@@ -281,7 +281,7 @@ const logSong = (data) => {
 
 const generateInputSong = () => {
     document.getElementById('generate-button').disabled = true;
-    document.getElementById('lyrics-text').innerHTML = '<iframe src="https://cdn.discordapp.com/attachments/766636913343463454/943389634052894760/loader-ly.gif" scrolling="no" id="loader"></iframe>';
+    document.getElementById('lyrics-text').innerHTML = '<iframe src="./assets/loader-ly.gif" scrolling="no" id="loader"></iframe>';
     fetch(apiBaseURL + '/generate?query=' + document.getElementById('artist-input').value.trim())
     .then(async (response) => {
         const resp = await response.json()
@@ -298,7 +298,7 @@ const generateInputSong = () => {
 
 const generateRandomSong = () => {
     document.getElementById('generate-button').disabled = true;
-    document.getElementById('lyrics-text').innerHTML = '<iframe src="https://cdn.discordapp.com/attachments/766636913343463454/943389634052894760/loader-ly.gif" scrolling="no" id="loader"></iframe>';
+    document.getElementById('lyrics-text').innerHTML = '<iframe src="./assets/loader-ly.gif" scrolling="no" id="loader"></iframe>';
     fetch(apiBaseURL + '/random')
     .then(async (response) => {
         const resp = await response.json()
